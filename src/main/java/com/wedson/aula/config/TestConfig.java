@@ -10,10 +10,12 @@ import org.springframework.context.annotation.Profile;
 
 import com.wedson.aula.entities.Categoria;
 import com.wedson.aula.entities.Pedido;
+import com.wedson.aula.entities.PedidoItem;
 import com.wedson.aula.entities.Produto;
 import com.wedson.aula.entities.User;
 import com.wedson.aula.entities.enums.PedidoStatus;
 import com.wedson.aula.repositories.CategoriaRepository;
+import com.wedson.aula.repositories.PedidoItemRepository;
 import com.wedson.aula.repositories.PedidoRepository;
 import com.wedson.aula.repositories.ProdutoRepository;
 import com.wedson.aula.repositories.UserRepository;
@@ -33,6 +35,8 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private ProdutoRepository produtoRepository;
 
+	@Autowired
+	private PedidoItemRepository pedidoItemRepository;
 	
 	@Override
 	public void run(String... args) throws Exception {
@@ -69,6 +73,13 @@ public class TestConfig implements CommandLineRunner {
 
 		userRepository.saveAll(Arrays.asList(u1, u2));
 		pedidoRepository.saveAll(Arrays.asList(o1, o2, o3));
+	
+		PedidoItem oi1 = new PedidoItem(o1, p1, 2, p1.getPreco());
+		PedidoItem oi2 = new PedidoItem(o1, p3, 1, p3.getPreco()); 
+		PedidoItem oi3 = new PedidoItem(o2, p3, 2, p3.getPreco()); 
+		PedidoItem oi4 = new PedidoItem(o3, p5, 2, p5.getPreco()); 
+	
+		pedidoItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 	}
 
 }
