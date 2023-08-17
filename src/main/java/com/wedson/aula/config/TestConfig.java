@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.wedson.aula.entities.Categoria;
+import com.wedson.aula.entities.Pagamento;
 import com.wedson.aula.entities.Pedido;
 import com.wedson.aula.entities.PedidoItem;
 import com.wedson.aula.entities.Produto;
@@ -80,6 +81,11 @@ public class TestConfig implements CommandLineRunner {
 		PedidoItem oi4 = new PedidoItem(o3, p5, 2, p5.getPreco()); 
 	
 		pedidoItemRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+	
+		Pagamento pag1 = new Pagamento(null, Instant.parse("2019-07-21T05:42:10Z"),o1);
+		o1.setPagamento(pag1);
+		
+		pedidoRepository.save(o1);
 	}
 
 }
