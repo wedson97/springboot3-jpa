@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.wedson.aula.entities.User;
 import com.wedson.aula.repositories.UserRepository;
+import com.wedson.aula.services.exceptions.ResourceNotFoundException;
 
 
 @Service
@@ -22,7 +23,7 @@ public class UserService {
 	
 	public User findById(Long id) {
 		Optional<User> obj = repository.findById(id);
-		return obj.get();
+		return obj.orElseThrow(() -> new ResourceNotFoundException(id));
 	}
 	
 	public User insert(User obj) {
